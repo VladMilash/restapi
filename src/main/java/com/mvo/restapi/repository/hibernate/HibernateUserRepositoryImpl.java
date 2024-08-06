@@ -6,6 +6,7 @@ import com.mvo.restapi.model.User;
 import com.mvo.restapi.repository.UserRepository;
 import com.mvo.restapi.repository.dbutil.HibernateHelper;
 import org.hibernate.Hibernate;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -75,10 +76,7 @@ public class HibernateUserRepositoryImpl implements UserRepository {
     @Override
     public User findById(Integer id) {
         return hibernateHelper.executeWithoutTransaction(session -> {
-            String userHql = "SELECT u FROM User u LEFT JOIN FETCH u.events e LEFT JOIN FETCH e.file WHERE u.id = :id";
-            Query<User> userQuery = session.createQuery(userHql, User.class);
-            userQuery.setParameter("id", id);
-            User user = userQuery.uniqueResult();
+            User user = fetchJoinUserSelect(session, id);
 
             if (user == null) {
                 throw new NotExistCrudException(id);
@@ -115,10 +113,7 @@ public class HibernateUserRepositoryImpl implements UserRepository {
     @Override
     public void deleteById(Integer id) {
         hibernateHelper.executeWithTransaction(session -> {
-            String userHql = "SELECT u FROM User u LEFT JOIN FETCH u.events e LEFT JOIN FETCH e.file WHERE u.id = :id";
-            Query<User> userQuery = session.createQuery(userHql, User.class);
-            userQuery.setParameter("id", id);
-            User user = userQuery.uniqueResult();
+            User user = fetchJoinUserSelect(session, id);
 
             if (user == null) {
                 throw new NotExistCrudException(id);
@@ -126,5 +121,12 @@ public class HibernateUserRepositoryImpl implements UserRepository {
             session.remove(user);
             return null;
         });
+    }
+
+    private User fetchJoinUserSelect(Session session, Integer userId) {
+        String userHql = "SELECT u FROM User u LEFT JOIN FETCH u.events e LEFT JOIN FETCH e.file WHERE u.id = :id";
+        Query<User> userQuery = session.createQuery(userHql, User.class);
+        userQuery.setParameter("id", userId);
+        return userQuery.uniqueResult();
     }
 }
