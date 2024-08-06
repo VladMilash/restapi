@@ -31,6 +31,10 @@ public class User {
         this.events = events;
     }
 
+    public User(String name) {
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }
