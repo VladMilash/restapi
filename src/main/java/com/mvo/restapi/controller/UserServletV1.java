@@ -3,7 +3,6 @@ package com.mvo.restapi.controller;
 import com.google.gson.Gson;
 import com.mvo.restapi.exception.CrudException;
 import com.mvo.restapi.exception.NotExistCrudException;
-import com.mvo.restapi.model.File;
 import com.mvo.restapi.model.User;
 import com.mvo.restapi.repository.UserRepository;
 import com.mvo.restapi.repository.hibernate.HibernateUserRepositoryImpl;
