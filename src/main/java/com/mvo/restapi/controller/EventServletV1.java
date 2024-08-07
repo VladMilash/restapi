@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/api/v1/Events/*")
+@WebServlet("/api/v1/events/*")
 public class EventServletV1 extends HttpServlet {
     private EventRepository eventRepository;
     private EventService eventService;
