@@ -151,7 +151,7 @@ public class FileServletV1 extends HttpServlet {
         } catch (FileUploadException e) {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to upload file");
         } catch (NotExistCrudException e) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid user ID");
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid file ID");
         }
     }
 
