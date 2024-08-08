@@ -96,6 +96,8 @@ public class UserServletV1 extends HttpServlet {
             gsonUtil.sendJsonResponse(resp, user);
         } catch (NotExistCrudException | IOException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -118,7 +120,7 @@ public class UserServletV1 extends HttpServlet {
         } catch (NotExistCrudException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
         } catch (CrudException e) {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update user");
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -129,6 +131,8 @@ public class UserServletV1 extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } catch (NotExistCrudException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -137,8 +141,8 @@ public class UserServletV1 extends HttpServlet {
             User user = gson.fromJson(req.getReader(), User.class);
             userService.createUser(user);
             gsonUtil.sendJsonResponse(resp, user);
-        } catch (Exception e) {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to save user");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 }

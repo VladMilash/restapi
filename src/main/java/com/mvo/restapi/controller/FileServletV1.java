@@ -16,6 +16,7 @@ import com.mvo.restapi.service.FileServiceImpl;
 import com.mvo.restapi.util.GsonUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.List;
 
+@MultipartConfig
 @WebServlet("/api/v1/files/*")
 public class FileServletV1 extends HttpServlet {
     private FileRepository fileRepository;
@@ -104,9 +106,8 @@ public class FileServletV1 extends HttpServlet {
             List<File> files = fileService.getAllFiles();
             gsonUtil.sendJsonResponse(resp, files);
         } catch (CrudException e) {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to get Files");
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
-
     }
 
     private void getFileById(HttpServletRequest req, HttpServletResponse resp, int id) throws IOException {
@@ -115,6 +116,8 @@ public class FileServletV1 extends HttpServlet {
             gsonUtil.sendJsonResponse(resp, file);
         } catch (NotExistCrudException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -128,7 +131,7 @@ public class FileServletV1 extends HttpServlet {
         } catch (NotExistCrudException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
         } catch (CrudException e) {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update file");
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -139,6 +142,8 @@ public class FileServletV1 extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } catch (NotExistCrudException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -152,6 +157,8 @@ public class FileServletV1 extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to upload file");
         } catch (NotExistCrudException e) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid file ID");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 

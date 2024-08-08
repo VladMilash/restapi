@@ -95,6 +95,8 @@ public class EventServletV1 extends HttpServlet {
             gsonUtil.sendJsonResponse(resp, event);
         } catch (NotExistCrudException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Event not found");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -102,8 +104,8 @@ public class EventServletV1 extends HttpServlet {
         try {
             List<Event> events = eventService.getAllEvents();
             gsonUtil.sendJsonResponse(resp, events);
-        } catch (CrudException | IOException e) {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to get Events");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -117,7 +119,7 @@ public class EventServletV1 extends HttpServlet {
         } catch (NotExistCrudException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Event not found");
         } catch (CrudException e) {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to update event");
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -128,6 +130,8 @@ public class EventServletV1 extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } catch (NotExistCrudException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Event not found");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
@@ -136,8 +140,8 @@ public class EventServletV1 extends HttpServlet {
             Event event = gson.fromJson(req.getReader(), Event.class);
             eventService.createEvent(event);
             gsonUtil.sendJsonResponse(resp, event);
-        } catch (Exception e) {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to save event");
+        } catch (CrudException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 }
