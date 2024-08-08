@@ -1,0 +1,370 @@
+{
+  "info": {
+    "_postman_id": "9e4c3b54-2e0e-4b47-bb6a-7501a5f838d3",
+    "name": "REST API File Management",
+    "description": "Collection for managing users, files, and events.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User API",
+      "item": [
+        {
+          "info": {
+            "_postman_id": "a2a5d9d0-345b-40b0-8a73-fdd1e7b8454d",
+            "name": "Create User",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"John Doe\", \"events\": []}"
+            }
+          }
+        },
+        {
+          "info": {
+            "_postman_id": "4bcf4d5d-cb1e-4d1c-85d7-caf2c05532dc",
+            "name": "Get User",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "info": {
+            "_postman_id": "d88e8b88-0288-4a5b-bc82-452b3a4f652f",
+            "name": "Update User",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Jane Doe\", \"events\": []}"
+            }
+          }
+        },
+        {
+          "info": {
+            "_postman_id": "d4f4b978-bd78-4e6e-94d1-4b5e5b95b0e3",
+            "name": "Delete User",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/users/1",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "File API",
+      "item": [
+        {
+          "info": {
+            "_postman_id": "4f75a3a3-5fdc-4f67-b4ff-e29e36c7457b",
+            "name": "Upload File",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/files/",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "files",
+                "upload"
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "https://drive.google.com/uc?export=download&id=1NfIg7tZY16_Wo0t6kE42x35eQHj_k6Rs"
+                },
+                {
+                  "key": "userId",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "info": {
+            "_postman_id": "e5a6f0d0-5678-4d29-b5b0-6fc52d99fdf2",
+            "name": "Get File",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/files/1",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "files",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "info": {
+            "_postman_id": "f3b9e2e0-8d0d-4e24-a5b2-60b339e8e276",
+            "name": "Delete File",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/files/1",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "files",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "info": {
+            "_postman_id": "d5c5c580-9f4e-4c48-9a3b-bd7d09e16c1f",
+            "name": "Update File",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/files/1",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "files",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"updated_file.txt\", \"filePath\": \"/updated/file/path\"}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Event API",
+      "item": [
+        {
+          "info": {
+            "_postman_id": "8d09e8c4-90a4-40c7-bd3f-c0ea9f8c9d54",
+            "name": "Create Event",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/events",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "events"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"userId\": 1, \"fileId\": 1}"
+            }
+          }
+        },
+        {
+          "info": {
+            "_postman_id": "9b8d2e29-8487-4e5b-92c5-d92a09a0752b",
+            "name": "Get Event",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/events/1",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "events",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "info": {
+            "_postman_id": "b4e87e44-4f83-4baf-81e0-56006d671053",
+            "name": "Delete Event",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/api/v1/events/1",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "events",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "info": {
+            "_postman_id": "cdc1c99e-2f8b-4ed4-92ef-f87d2e8ca846",
+            "name": "Update Event",
+            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/events/1",
+              "host": [
+                "http://localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "events",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"userId\": 2, \"fileId\": 2}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
